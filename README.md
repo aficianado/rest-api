@@ -38,14 +38,14 @@ docker run -d -p 80:9091 --name rest-api-${BUILD_NUMBER} dbaficianado/dh2.0:${BU
 
 Swagger UI
 ```
-http://13.233.138.190/actuator/health
+http://13.233.138.190/dh/swagger-ui/index.html?configUrl=/dh/v3/api-docs
 ```
 Spring Actuator
 ```
-http://13.233.138.190/actuator/health
+http://13.233.138.190/dh/actuator/health
 ```
 Rest APIs
 ```
-http://13.233.138.190/hello
-http://13.233.138.190/rider
+http://13.233.138.190/dh/hello
+http://13.233.138.190/dh/rider
 ```

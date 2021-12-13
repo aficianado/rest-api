@@ -13,8 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-@RestController
-@RequestMapping("/rider")
+@org.springframework.web.bind.annotation.RestController
 public class RiderRestController {
 
     private static Gson gson = new Gson();
@@ -22,26 +21,33 @@ public class RiderRestController {
     @Autowired
     private RiderRepository repo;
 
-    @GetMapping(path="/{id}")
+    @GetMapping(path="/rider/error")
+    public Map<?, ?> error() {
+        Map<String, String> response = new HashMap<String, String>();
+        response.put("response", String.format("ERROR - Please visit [%s]", "http://server:port/context-path/swagger-ui.html"));
+        return response;
+    }
+
+    @GetMapping(path="/rider/{id}")
     public Map<String, String> getUser(@PathVariable int id) {
 
         Optional<Rider> r = repo.findById(id);
 
         Map<String, String> response = new HashMap<String, String>();
         if(r.isPresent()) {
-            response.put("response", gson.toJson(r.get()));
+            response.put("response", r.get().toString());
         } else {
             response.put("response", String.format("No record found for id []!", id));
         }
         return response;
     }
 
-    @GetMapping(path="/")
+    @GetMapping(path="/rider")
     public List<Rider> getAllUsers() {
         return repo.findAll();
     }
 
-    @PutMapping(path="/")
+    @PutMapping(path="/rider")
     public Map<String, String> saveRider(@RequestBody Rider rider) {
         repo.save(rider);
         Map<String, String> response = new HashMap<String, String>();
@@ -49,7 +55,7 @@ public class RiderRestController {
         return response;
     }
 
-    @PostMapping(path="/")
+    @PostMapping(path="/rider/")
     public Map<String, String> updateRider(@RequestBody Rider rider) {
         Optional<Rider> r = repo.findById(rider.getId());
         Map<String, String> response = new HashMap<String, String>();

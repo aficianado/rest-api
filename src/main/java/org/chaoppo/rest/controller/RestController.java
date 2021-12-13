@@ -15,10 +15,10 @@ public class RestController {
     private static final String KEY = "response";
     private static Gson gson = new Gson();
 
-    @GetMapping(path="/error")
+    @GetMapping(path="/")
     public Map<?, ?> error() {
         Map<String, String> response = new HashMap<String, String>();
-        response.put(KEY, String.format("ERROR - Please visit [%s]", "http://server:port/context-path/swagger-ui.html"));
+        response.put(KEY, String.format("Please visit [%s]", "http://server:port/dh/swagger-ui.html?configUrl=/dh/v3/api-docs"));
         return response;
     }
 
