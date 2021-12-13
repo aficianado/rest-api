@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @org.springframework.web.bind.annotation.RestController
-@RequestMapping("/")
 public class RestController {
 
     private static final String DEFAULT_VERSION = "v1";
@@ -24,15 +23,10 @@ public class RestController {
     }
 
     @GetMapping(path="/hello")
-    public Map<?, ?> getVersion() {
+    public Map<?, ?> home() {
         Map<String, String> response = new HashMap<String, String>();
         response.put(KEY, String.format("Hello World API requested. API [%s]!", DEFAULT_VERSION));
         return response;
-    }
-
-    @GetMapping(path="/")
-    public Map<?, ?> home() {
-        return getVersion();
     }
 
     @GetMapping(path="/hello/{name}")
@@ -41,10 +35,4 @@ public class RestController {
         response.put(KEY, String.format("Hello World API requested by [%s]. API [%s]!", name, DEFAULT_VERSION));
         return response;
     }
-
-    @GetMapping(path="/{name}")
-    public Map<?, ?> home(@PathVariable String name) {
-        return getVersion(name);
-    }
-
 }
