@@ -13,22 +13,23 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/rider")
 public class RiderRestController {
 
     @Autowired
     private RiderRepository repo;
 
-    @GetMapping(path="/rider/{id}")
+    @GetMapping(path="/{id}")
     public Rider getUser(@PathVariable int id) {
         return repo.findById(id).get();
     }
 
-    @GetMapping(path="/rider")
+    @GetMapping(path="/")
     public List<Rider> getAllUsers() {
         return repo.findAll();
     }
 
-    @PostMapping(path="/rider")
+    @PostMapping(path="/")
     public Map<String, String> saveRider(@RequestBody Rider rider) {
         repo.save(rider);
         Map<String, String> response = new HashMap<String, String>();
